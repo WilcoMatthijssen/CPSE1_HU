@@ -1,15 +1,11 @@
-
-#include "set.hpp"
 #define CATCH_CONFIG_MAIN
+#include "set.hpp"
 #include "single_include/catch2/catch.hpp"
 
 TEST_CASE( "char " ){
- 
    set<char,10>  setObject;
    setObject.add('y');
-
    REQUIRE( setObject.contains('y') == 1);   
-   
 }
 
 TEST_CASE( "char 3 array" ){

@@ -1,54 +1,52 @@
 
-#ifndef DISPLAYKLOK_HPP
-#define DISPLAYKLOK_HPP
+#ifndef DISPLAYCLOCK_HPP
+#define DISPLAYCLOCK_HPP
 
-class displayKlok{
+class displayclock{
    public:
-    uint8_t urenOffset=0;
-   uint8_t minutenOffset=0;
+    uint8_t hoursOffset=0;
+   uint8_t minutesOffset=0;
       hwlib::window & display;
-      modelKlok updateKlok;
-      hwlib::xy midden={64,32};
+      clockHandCalculator updateclock;
+      hwlib::xy middle={64,32};
 
-  displayKlok( hwlib::window & display, const modelKlok updateKlok)
+  displayclock( hwlib::window & display, const clockHandCalculator updateclock)
       :display(display) , 
-      updateKlok(updateKlok)
+      updateclock(updateclock)
       {}
 
   
-   
-
-   void tekenKlok(){
-      hwlib::circle klok(midden, 31);
-      klok.draw(display);
+   void drawclock(){
+      hwlib::circle clock(middle, 31);
+      clock.draw(display);
       for(int i=0; i<60;i+=5){
-         hwlib::circle punt(updateKlok.groteWijzerArray[i], 3);
-         punt.draw(display);
+         hwlib::circle point(updateclock.hourHandArray[i], 3);
+         point.draw(display);
       }
    }
 
-   void tekenGroteWijzer(int n){
-      hwlib::line groteWijzer(midden,updateKlok.groteWijzerArray[n]);
-      groteWijzer.draw(display);
+   void drawHourHand(int n){
+      hwlib::line hourHand(middle,updateclock.hourHandArray[n]);
+      hourHand.draw(display);
    }
 
-   void tekenKleineWijzer(int n){
-      hwlib::line kleineWijzer(midden,updateKlok.kleineWijzerArray[n]);
-      kleineWijzer.draw(display);
+   void drawMinuteHand(int n){
+      hwlib::line MinuteHand(middle,updateclock.MinuteHandArray[n]);
+      MinuteHand.draw(display);
    }
    void draw(){
       display.clear();
-        tekenKlok();
-        tekenGroteWijzer((hwlib::now_us()/15000000+minutenOffset)%60);
-        tekenKleineWijzer((hwlib::now_us()/1000000+urenOffset)%60);
+        drawclock();
+        drawHourHand((hwlib::now_us()/15000000+minutesOffset)%60);
+        drawMinuteHand((hwlib::now_us()/1000000+hoursOffset)%60);
         display.flush();
    }
-   void tijdsAanpassing(uint8_t uren, uint8_t minuten){
-        urenOffset+=uren;
-        urenOffset= urenOffset %60;
-        minutenOffset+=minuten;
-        minutenOffset= minutenOffset%60;
+   void timeOffset(uint8_t hours, uint8_t minutes){
+        hoursOffset+=hours;
+        hoursOffset= hoursOffset %60;
+        minutesOffset+=minutes;
+        minutesOffset= minutesOffset%60;
     }
 
 };
-#endif
+#endif //DISPLAYCLOCK_HPP

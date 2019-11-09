@@ -1,5 +1,5 @@
-#include "klok.hpp"
-#include "displayKlok.hpp"
+#include "clock.hpp"
+#include "displayclock.hpp"
 
 int main( void ){	 
     namespace target = hwlib::target;
@@ -10,12 +10,12 @@ int main( void ){
    auto sw0= target::pin_in(target::pins::d40);
    auto sw1= target::pin_in(target::pins::d38);
 
-   constexpr modelKlok klokje;
-   displayKlok drawK(display, klokje);
+   constexpr clockHandCalculator clock;
+   displayclock drawKC(display, clock);
    
    while(true){
-      drawK.draw();
-      if(!sw0.read()){ drawK.tijdsAanpassing(4,0); }
-      if(!sw1.read()){ drawK.tijdsAanpassing(0,4);}
+      drawC.draw();
+      if(   !sw0.read() ){ drawC.timeOffset(4,0);   }
+      if(   !sw1.read() ){ drawC.timeOffset(0,4);   }
    }
 }

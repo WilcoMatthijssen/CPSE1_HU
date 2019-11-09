@@ -8,6 +8,4 @@ application:
 	push {lr}
 	ldrb r0, =string
 	bl print_asciz
-
-
 	pop {pc}
