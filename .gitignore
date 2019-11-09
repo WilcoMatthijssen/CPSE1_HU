@@ -1,0 +1,6 @@
+# ignored extensions
+*.c
+*.o
+*.ld
+*.elf
+*.bin
