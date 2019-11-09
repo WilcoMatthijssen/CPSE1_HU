@@ -8,7 +8,7 @@
 ___
 ## Completed assignments
 ### [assignment-constexpr](https://github.com/WilcoMatthijssen/CPSE1_HU/tree/master/assignment-constexpr)
-Create a clock of which it's handle positions are calculated using constexpr.
+Create a clock where the positions of it's hands are calculated using constexpr.
 
 ### [assignment-decompres](https://github.com/WilcoMatthijssen/CPSE1_HU/tree/master/assignment-decompres)
 Decompress a file compressed with a version of LZ compression using assembly cortex-m0.
